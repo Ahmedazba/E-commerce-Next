@@ -1,12 +1,10 @@
 "use client";
-import Navbar from "@/components/Navbar/Navbar";
-
-import CartContextProvider from "@/components/Context/CartContext";
-import Footer from "@/components/Footer/Footer";
-
 import { SessionProvider } from "next-auth/react";
-import { Toaster } from "@/components/ui/sonner";
 import WishlistContextProvider from "../Context/wishlistContext";
+import CartContextProvider from "../Context/CartContext";
+import Footer from "../Footer/Footer";
+import { Toaster } from "sonner";
+import Navbar from './../Navbar/Navbar';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   return (

@@ -2,12 +2,12 @@
 export interface WishlistI {
   status: string
   count: number
-  data: ProducrI[]
+  data: ProductI[]
 }
 
-export interface ProducrI {
+export interface ProductI {
   sold: number
-  images: string[]
+  images?: string[]
   subcategory: Subcategory[]
   ratingsQuantity: number
   _id: string
@@ -16,7 +16,7 @@ export interface ProducrI {
   description: string
   quantity: number
   price: number
-  imageCover: string
+  imageCover?: string
   category: Category
   brand: Brand
   ratingsAverage: number
@@ -37,12 +37,12 @@ export interface Category {
   _id: string
   name: string
   slug: string
-  image: string
+  image?: string
 }
 
 export interface Brand {
   _id: string
   name: string
   slug: string
-  image: string
+  image?: string
 }

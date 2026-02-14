@@ -6,11 +6,11 @@ import Rating from "@/components/Rating/Rating";
 import Link from "next/link";
 import AddToCart from "@/components/AddToCart/AddToCart";
 import { formatCurrency } from "@/Helpers/formatCurrency";
-import { ProducrI } from '@/interfaces/product';
+import { ProductI } from '@/interfaces/product';
 
 import { Button } from '../ui/button';
 type AllProductsProps = {
-  products: ProducrI[];
+  products: ProductI[];
   fromWishlist?: boolean;
   removeFromWishlist?: (id: string) => void;
   removingId?: string | null;
@@ -30,7 +30,7 @@ export default function AllProducts({ products, fromWishlist = false, removeFrom
 
           <Card className="my-3 hover:shadow-2xl cursor-pointer duration-300 transition-all hover:-translate-y-4">
             <Link href={"/products/" + (product.id || product._id)}>
-              <Image src={product.imageCover} alt="" className="w-full rounded-t-xl" width={300} height={300} />
+              <Image src={product.imageCover!} alt="" className="w-full rounded-t-xl" width={300} height={300} />
               <CardHeader>
                 <CardTitle>{product.title.split(" ", 2)}</CardTitle>
                 <CardDescription>{product.category.name}</CardDescription>

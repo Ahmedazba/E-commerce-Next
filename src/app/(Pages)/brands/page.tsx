@@ -16,7 +16,7 @@ export default async function Brands() {
       {brands.map((brand) => (
         <div key={brand._id} className='shadow-xl bg-gray-50 rounded-xl m-3 sm:m-1 md:m-0'>
           <Link href={'/brands/' + brand._id}>
-            <Image src={brand.image} alt="" className="w-full rounded-xl" width={300} height={300} />
+            <Image src={brand.image!} alt="" className="w-full rounded-xl" width={300} height={300} />
           </Link>
           <h2 className='text-center'>{brand.name}</h2>
         </div>

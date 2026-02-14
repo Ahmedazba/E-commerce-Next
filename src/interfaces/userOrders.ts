@@ -42,7 +42,7 @@ export interface Product {
   ratingsQuantity: number
   _id: string
   title: string
-  imageCover: string
+  imageCover?: string
   category: Category
   brand: Brand
   ratingsAverage: number
@@ -60,12 +60,12 @@ export interface Category {
   _id: string
   name: string
   slug: string
-  image: string
+  image?: string
 }
 
 export interface Brand {
   _id: string
   name: string
   slug: string
-  image: string
+  image?: string
 }

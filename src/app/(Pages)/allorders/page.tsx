@@ -92,7 +92,7 @@ export default function Allorders() {
                         <Image
                           height={400}
                           width={400}
-                          src={item.product.imageCover}
+                          src={item.product.imageCover!}
                           alt={item.product.title}
                           className="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-lg"
                         />

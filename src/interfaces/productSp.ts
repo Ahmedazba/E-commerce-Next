@@ -11,7 +11,7 @@ export interface ProductSpI {
   description: string
   quantity: number
   price: number
-  imageCover: string
+  imageCover?: string
   category: CategoryI
   brand: CategoryI
   ratingsAverage: number

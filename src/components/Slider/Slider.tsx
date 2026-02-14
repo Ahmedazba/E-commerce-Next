@@ -22,7 +22,7 @@ export function Slider({images } : {images : string[] }) {
       ]}>
       <CarouselContent>
         {images.map((img , index)=> <CarouselItem key={index}>
-            <Image src={img} className='w-full' alt='' width={200} height={200}/>
+            <Image src={img!} className='w-full' alt='' width={200} height={200}/>
           </CarouselItem>)}
         
       </CarouselContent>

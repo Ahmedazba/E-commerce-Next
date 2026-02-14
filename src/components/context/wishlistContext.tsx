@@ -1,7 +1,7 @@
 "use client";
 
 import { getUserToken } from "@/Helpers/accessToken";
-import { ProducrI } from "@/interfaces/product";
+import { ProductI } from "@/interfaces/product";
 import { WishlistI } from "@/interfaces/wishlist";
 
 import { createContext, ReactNode, useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 import { CategoryI } from "./category"
 
-export interface ProducrI {
+export interface ProductI {
   sold: number
   images?: string[]
   subcategory: CategoryI[]
@@ -11,7 +11,7 @@ export interface ProducrI {
   description: string
   quantity: number
   price: number
-  imageCover: string
+  imageCover?: string
   category: CategoryI
   brand: CategoryI
   ratingsAverage: number

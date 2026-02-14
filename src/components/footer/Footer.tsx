@@ -45,9 +45,9 @@ export default function Footer() {
               <span className="text-gray-700 font-medium">
                 Payment Partners
               </span>
-              <Image loading="eager" src={amazonPay} alt="Amazon Pay" width={40} height={40} />
-              <Image loading="eager" src={masterCard} alt="MasterCard" width={40} height={40} />
-              <Image loading="eager" src={payPal} alt="PayPal" width={40} height={40} />
+              <Image loading="eager" src={amazonPay!} alt="Amazon Pay" width={40} height={40} />
+              <Image loading="eager" src={masterCard!} alt="MasterCard" width={40} height={40} />
+              <Image loading="eager" src={payPal!} alt="PayPal" width={40} height={40} />
             </div>
 
             {/* App Stores */}
@@ -55,8 +55,8 @@ export default function Footer() {
               <div className="text-gray-700 font-medium">
                 Get deliveries with FreshCart
               </div>
-              <Image loading="eager" src={appleStore} alt="Apple Store" width={120} height={40} />
-              <Image loading="eager" src={googlePlay} alt="Google Play" width={120} height={40} />
+              <Image loading="eager" src={appleStore!} alt="Apple Store" width={120} height={40} />
+              <Image loading="eager" src={googlePlay!} alt="Google Play" width={120} height={40} />
             </div>
           </div>
 

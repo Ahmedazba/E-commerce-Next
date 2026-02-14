@@ -1,5 +1,5 @@
 
-import { ProducrI } from "@/interfaces/product";
+import { ProductI } from "@/interfaces/product";
 import React from "react";
 
 
@@ -13,7 +13,7 @@ export default async function Products() {
 
 
   const response = await fetch(`https://ecommerce.routemisr.com/api/v1/products`);
-  const { data: products }: { data: ProducrI[] } = await response.json();
+  const { data: products }: { data: ProductI[] } = await response.json();
 
 
 
