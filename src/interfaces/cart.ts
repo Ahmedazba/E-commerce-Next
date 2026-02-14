@@ -1,6 +1,6 @@
-import { ProductI } from "./product"
+import { ProductSpI } from "./productSp"
 
-export interface CartResponse {
+export interface CartResponseI {
   status: string
   message?:string
   numOfCartItems: number
@@ -11,16 +11,19 @@ export interface CartResponse {
 export interface Data {
   _id: string
   cartOwner: string
-  products: Item[]
+  products: Product[]
   createdAt: string
   updatedAt: string
   __v: number
   totalCartPrice: number
 }
 
-export interface Item {
+export interface Product {
   count: number
   _id: string
-  product: ProductI
+  product: ProductSpI
   price: number
 }
+
+
+

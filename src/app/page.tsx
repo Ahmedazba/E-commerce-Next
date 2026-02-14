@@ -1,20 +1,26 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function Home() {
-  // https://ecommerce.routemisr.com/api/v1/products
   return (
-    <>
-      <div className="flex flex-col gap-5 mt-50 justify-center items-center text-center">
-        <h1 className="text-6xl font-bold ">Welcome To ShopMart</h1>
-        <p className="font-sans">
-          The buying and selling of goods, services, or information over the
-          internet and other computer networks
-        </p>
-        <Link href={"/products"}>
-          <Button className="px-7 py-5 cursor-pointer">Shop Now</Button>
-        </Link>
+    <section className="flex flex-col items-center justify-center text-center py-20 px-4">
+
+      <h1 className="text-4xl font-bold mb-4">Welcome to ShopMart</h1>
+
+
+      <p className="text-lg text-gray-600 max-w-2xl mb-8">
+        Discover the latest technology, fashion, and lifestyle products.
+        Quality guaranteed with fast shipping and excellent customer service.
+      </p>
+
+
+      <div className="flex gap-4">
+        <Button onClick={() => { location.href = '/products'; }} className="bg-black text-white hover:bg-gray-800 cursor-pointer">
+          Shop Now
+        </Button>
+        <Button onClick={() => { location.href = '/categories'; }} variant="outline" className="cursor-pointer">Browse Categories</Button>
       </div>
-    </>
+    </section>
   );
 }

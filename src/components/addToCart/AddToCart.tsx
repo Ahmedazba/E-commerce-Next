@@ -1,44 +1,102 @@
 "use client";
-import { HeartIcon, Loader2 } from "lucide-react";
 import React, { useContext, useState } from "react";
 import { Button } from "../ui/button";
+import { Heart, Loader2, ShoppingCartIcon } from "lucide-react";
 import { CardFooter } from "../ui/card";
-import { toast } from "sonner";
-import { CartContext } from "../context/CartContext";
 
-export default function AddToCart({ productId }: { productId: string }) {
+
+import { toast } from "sonner";
+import { CartContext } from "../Context/CartContext";
+
+import { addProductToWishlist } from "@/app/(pages)/wishlist/_action/addProductToWishlist";
+import { useSession } from "next-auth/react";
+import { addItemToCart } from "@/app/(pages)/products/_action/addItemToCart.action";
+;
+
+
+
+export default function AddToCart({ productId , fromWishlist}: { productId: string , fromWishlist : boolean}) {
+
+
   const { setCartData } = useContext(CartContext);
-  const [isloading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const session = useSession();
+
+
+
+
+
   async function addProductToCart() {
-    setIsloading(true);
-    const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
-      method: "POST",
-      body: JSON.stringify({ productId }),
-      headers: {
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2JlMzEyYzUzODE4YjBiZmMyNDVhMSIsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NzI2ODExLCJleHAiOjE3Nzc1MDI4MTF9.MnrO_19FXqUzZPLpIyDySjEHTZWFlk3dkXlzcMe1YI8",
-        "content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    (data.status == "success" && toast.success("product added successfuly", {position:"top-center" }),
-      setCartData(data));
-    console.log(data);
-    setIsloading(false);
+
+    if (session.status == 'authenticated') {
+      setIsLoading(true);
+      const data = await addItemToCart(productId);
+
+
+
+      setCartData(data);
+      data.status == "success" && toast.success(data.message);
+      setIsLoading(false);
+
+    } else {
+      toast.error('You must be logged in to add to cart');
+    }
   }
+
+
+
+  async function addToWishlist() {
+
+    if (session.status == 'authenticated') {
+      const data = await addProductToWishlist(productId);
+      if (data.status == "success") {
+        toast.success(data.message);
+        setFavorite(true);
+      } else {
+
+        toast.error(data.message);
+      }
+
+
+    } else {
+      toast.error('You must be logged in to add to wishlist');
+    }
+
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+
 
   return (
     <>
-      <CardFooter className="gap-2">
-        <Button
-          onClick={addProductToCart}
-          className="grow h-10 text-lg rounded-2xl font-semibold cursor-pointer transition-all"
-          disabled={isloading}
-        >
-          {isloading ? <Loader2 className="animate-spin" /> : "Add To Cart"}
+      <CardFooter className="cursor-pointer">
+        <Button onClick={addProductToCart} className="cursor-pointer grow">
+          {" "}
+          {isLoading ? <Loader2 className="animate-spin" /> : <ShoppingCartIcon />} Add To Cart
         </Button>
-        <HeartIcon />
+
+        {/* <Heart className="fill-black" onClick={removeProductToWishlist} /> */}
+        {!fromWishlist && <Heart onClick={addToWishlist} />}
+        
+
+
+
       </CardFooter>
     </>
   );
 }
+
+
+

@@ -1,44 +1,76 @@
 "use client";
-import { CartResponse } from "@/interfaces";
+import { getUserToken } from "@/Helpers/accessToken";
+import { CartResponseI } from "@/interfaces/Cart";
+import { useSession } from "next-auth/react";
+
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 export const CartContext = createContext<{
-    cartData:CartResponse|null,
-    setCartData:(value:CartResponse|null)=>void ,
-    isloading:boolean,
-    setIsloading:(value:boolean)=>void,
-    getCart:()=>void
-
+  cartData: CartResponseI | null;
+  setCartData: (value: CartResponseI | null) => void;
+  loading: boolean;
+  setLoading: (value: boolean) => void;
+  getCart: () => void;
 }>({
-    cartData:null,
-    setCartData:()=>{},
-    isloading: false,
-    setIsloading:()=>{},
-    getCart:()=>{}
-
+  cartData: null,
+  setCartData: () => {},
+  loading: true,
+  setLoading: () => {},
+  getCart: () => {},
 });
 
-export default function CartContextProvider({children,}: {children: ReactNode;}) {
-  const [cartData, setCartData] = useState<CartResponse|null>(null);
-  const [isloading, setIsloading] = useState(false)
+export default function CartContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const [cartData, setCartData] = useState<CartResponseI | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const session = useSession();
+
   async function getCart() {
-    setIsloading(true)
-    const response = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/cart",
+    const token = await getUserToken();
+
+    if (session.status === "authenticated") {
       {
-        headers: {
-          token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5N2JlMzEyYzUzODE4YjBiZmMyNDVhMSIsIm5hbWUiOiJBaG1lZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzY5NzI2ODExLCJleHAiOjE3Nzc1MDI4MTF9.MnrO_19FXqUzZPLpIyDySjEHTZWFlk3dkXlzcMe1YI8",
-        },
-      },
-    );
-    const data:CartResponse = await response.json();
-    setCartData(data)
-    console.log(data);
-    setIsloading(false)
+        const response = await fetch(
+          `https://ecommerce.routemisr.com/api/v1/cart`,
+          {
+            method: "GET",
+            headers: {
+              token: token + "",
+            },
+          },
+        );
+
+        const data: CartResponseI = await response.json();
+
+        setCartData(data);
+
+        if (data?.cartId) {
+          localStorage.setItem("cartId", data.cartId);
+        }
+
+        if (cartData?.data?.cartOwner) {
+          localStorage.setItem("userId", cartData.data.cartOwner);
+        }
+
+        setLoading(false);
+      }
+    }
   }
+
   useEffect(() => {
     getCart();
-  }, []);
-  return <CartContext.Provider value={{cartData , setCartData ,isloading ,setIsloading , getCart}}>{children}</CartContext.Provider>;
+  }, [session.status]);
+
+  return (
+    <>
+      <CartContext.Provider
+        value={{ cartData, setCartData, loading, setLoading, getCart }}
+      >
+        {children}
+      </CartContext.Provider>
+    </>
+  );
 }

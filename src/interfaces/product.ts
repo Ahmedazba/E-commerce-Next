@@ -1,11 +1,9 @@
-import { BrandI } from "./brand"
 import { CategoryI } from "./category"
-import { SubcategoryI } from "./subCategory"
 
-export interface ProductI {
+export interface ProducrI {
   sold: number
   images: string[]
-  subcategory: SubcategoryI[]
+  subcategory: CategoryI[]
   ratingsQuantity: number
   _id: string
   title: string
@@ -15,12 +13,13 @@ export interface ProductI {
   price: number
   imageCover: string
   category: CategoryI
-  brand: BrandI
+  brand: CategoryI
   ratingsAverage: number
   createdAt: string
   updatedAt: string
   id: string
 }
+
 
 
 
