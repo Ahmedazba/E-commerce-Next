@@ -22,7 +22,7 @@ export default async function ProductDetails({ params }: { params: Params }) {
     <>
       <Card className="grid grid-cols-3 items-center">
         <div className="col-span-1">
-          <Slider images={product.images} />
+          <Slider images={product.images!} />
         </div>
         <div className="col-span-2">
           <CardHeader>

@@ -17,7 +17,7 @@ export default async function Categories() {
       {categorys.map((category) => (
         <div key={category._id} className='shadow-xl bg-gray-50 rounded-xl m-3 sm:m-1 md:m-0'>
          <Link href={'/categories/' + category._id}>
-            <Image src={category.image} alt="" className="h-50 w-50 rounded-xl object-fill mx-auto" width={300} height={300} />
+            <Image src={category.image!} alt="" className="h-50 w-50 rounded-xl object-fill mx-auto" width={300} height={300} />
          </Link>
             
           <h2 className='text-center'>{category.name}</h2>

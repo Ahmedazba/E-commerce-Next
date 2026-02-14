@@ -1,6 +1,6 @@
-import { FaildLoginRes, SuccessLoginRes } from "@/interfaces";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import {FaildLoginResponse, SuccessLoginResponse } from './interfaces/auth';
 export const authOptions:AuthOptions ={
   providers: [
     CredentialsProvider({
@@ -21,7 +21,7 @@ export const authOptions:AuthOptions ={
             headers: { "content-type": "application/json" },
           },
         );
-        const payload :SuccessLoginRes|FaildLoginRes = await response.json();
+        const payload :SuccessLoginResponse|FaildLoginResponse = await response.json();
 
         console.log(payload);  
         if('token' in payload) {

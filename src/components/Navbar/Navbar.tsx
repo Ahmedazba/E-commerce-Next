@@ -12,13 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Loader2, MenuIcon, ShoppingCartIcon, XIcon } from "lucide-react";
+import { Loader2, MenuIcon, XIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useContext, useState } from "react";
-import { CartContext } from "../Context/CartContext";
+
 import { signOut, useSession } from "next-auth/react";
 import NavbarPho from "../NavbarPho/NavbarPho";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
+import { CartContext } from "../Context/CartContext";
 
 export default function Navbar() {
   const { loading, cartData } = useContext(CartContext);

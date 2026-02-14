@@ -127,11 +127,11 @@ export default function WishlistPage() {
           No items in your wishlist.
         </p>
       ) : (
-        <AllProducts 
-          products={wishlisData.data} 
-          fromWishlist 
-          removeFromWishlist={removeFromWishlist}
-        />
+        <AllProducts
+  products={wishlisData.data as any} // أو استخدام النوع المستهدف مباشرة
+  fromWishlist
+  removeFromWishlist={removeFromWishlist}
+/>
       )}
     </>
   );

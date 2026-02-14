@@ -2,7 +2,7 @@ import { CategoryI } from "./category"
 
 export interface ProductSpI {
   sold: number
-  images: string[]
+  images?: string[]
   subcategory: CategoryI[]
   ratingsQuantity: number
   _id: string
